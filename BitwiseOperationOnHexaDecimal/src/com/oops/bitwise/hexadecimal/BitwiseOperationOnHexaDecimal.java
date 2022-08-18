@@ -1,10 +1,15 @@
+<<<<<<< HEAD
 package com.oops.bitwise.hexadecimal;
+=======
+package com.oops.bitwise.hexadecimal;//package com.oops.bitwise.hexadecimal;
+>>>>>>> 18c389fc79dbac98a291bdd20601c0d1b8b7ce03
 
 import java.util.PriorityQueue;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+<<<<<<< HEAD
 abstract class FilterHexValues {
     abstract PriorityQueue<Integer> getHexValues(String str);                   //Abstract Class with abstract method
 }
@@ -37,13 +42,18 @@ class HexValuesImplementation extends FilterHexValues {
     }
 }
 
+=======
+>>>>>>> 18c389fc79dbac98a291bdd20601c0d1b8b7ce03
 public class BitwiseOperationOnHexaDecimal {
 
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
+<<<<<<< HEAD
 
+=======
+>>>>>>> 18c389fc79dbac98a291bdd20601c0d1b8b7ce03
         HexValuesImplementation hexImp = new HexValuesImplementation();                 // Object creation for Class that extends abstract class
         PriorityQueue<Integer> hv = new PriorityQueue<>(hexImp.getHexValues(input));    // Creating new Priority queue
 
@@ -51,11 +61,17 @@ public class BitwiseOperationOnHexaDecimal {
         int count=0;
         for (int elem: hv) {
             if (count==0) {
+<<<<<<< HEAD
 //                System.out.println(elem);
                 count++;
                 continue;
             }
 //            System.out.println(elem);
+=======
+                count++;
+                continue;
+            }
+>>>>>>> 18c389fc79dbac98a291bdd20601c0d1b8b7ce03
             int b = elem;
             result = result | b;                                    //Bitwise OR (|) with the previous value
             count++;
