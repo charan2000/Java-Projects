@@ -12,6 +12,10 @@ import java.nio.charset.Charset;
 
 public class ChatClientHandler extends SimpleChannelInboundHandler {
 
+    public void channelActive(ChannelHandlerContext chc) {
+        chc.writeAndFlush(Unpooled.copiedBuffer("Netty Sucks !", CharsetUtil.UTF_8));
+    }
+
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, Object o) throws Exception {
 
@@ -25,8 +29,6 @@ public class ChatClientHandler extends SimpleChannelInboundHandler {
         chc.close();
     }
 
-    public void channelActive(ChannelHandlerContext chc) {
-        chc.writeAndFlush(Unpooled.copiedBuffer("Netty Sucks !", CharsetUtil.UTF_8));
-    }
+
 
 }

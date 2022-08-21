@@ -10,7 +10,7 @@ public class ChatServerHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext chc, Object msg) throws Exception {
 
-        Channel channel = chc.channel();
+//        Channel channel = chc.channel();
 
         ByteBuf inBuffer = (ByteBuf) msg;
 
