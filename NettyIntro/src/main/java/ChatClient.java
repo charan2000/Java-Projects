@@ -38,6 +38,5 @@ public class ChatClient {
         } finally {
             group.shutdownGracefully();
         }
-
     }
 }

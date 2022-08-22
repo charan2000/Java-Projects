@@ -8,18 +8,17 @@ import io.netty.util.CharsetUtil;
 import java.nio.charset.Charset;
 
 
-public class ChatClientHandler extends SimpleChannelInboundHandler<Object> {
+public class ChatClientHandler extends SimpleChannelInboundHandler<String> {
 
     public void channelActive(ChannelHandlerContext chc) {
         chc.writeAndFlush(Unpooled.copiedBuffer(" Netty is Buffed !", CharsetUtil.UTF_8));
     }
 
     @Override
-    protected void channelRead0(ChannelHandlerContext channelHandlerContext, Object o) throws Exception {
+    protected void channelRead0(ChannelHandlerContext channelHandlerContext, String o) throws Exception {
 
-        ByteBuf intByte = (ByteBuf) o;
+        System.out.println("[Client-Received:] " + o);
 
-        System.out.println("[Client-Received:] " + intByte.toString(CharsetUtil.UTF_8));
     }
 
     public void exceptionCaught (ChannelHandlerContext chc, Throwable cause) {
