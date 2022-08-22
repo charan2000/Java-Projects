@@ -22,9 +22,11 @@ public class ChatServer {
             ChannelFuture channelFuture = serverBootstrap.bind().sync()
                     .channel().closeFuture().sync();
         }
-
+        catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         finally {
-            group.shutdownGracefully().sync();
+            group.shutdownGracefully();
         }
 
     }
