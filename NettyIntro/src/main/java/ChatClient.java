@@ -32,7 +32,8 @@ public class ChatClient {
                     .handler(new ChatClientInitializer())
                     .remoteAddress(new InetSocketAddress("localhost", 9999));
 
-            ChannelFuture channel = bootstrap.connect().sync().channel().closeFuture().sync();
+            ChannelFuture channel = bootstrap.connect().sync();
+            channel.channel().closeFuture().sync();
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         }
         finally {

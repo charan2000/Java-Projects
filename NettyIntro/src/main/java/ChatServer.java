@@ -9,6 +9,7 @@ import java.net.InetSocketAddress;
 
 public class ChatServer {
 
+    private static final int port = 9999;
     public static void main(String[] args) throws InterruptedException {
 
         EventLoopGroup masterGroup = new NioEventLoopGroup();
@@ -17,11 +18,13 @@ public class ChatServer {
             ServerBootstrap serverBootstrap = new ServerBootstrap()
                     .group(masterGroup,userGroup)
                     .channel(NioServerSocketChannel.class)
-                    //.localAddress(new InetSocketAddress("localhost", 9999))
                     .childHandler(new ChatServerInitializer());
 
             serverBootstrap.bind(9999).sync()
                     .channel().closeFuture().sync();
+
+            ChannelFuture ch = serverBootstrap.bind(port).sync();
+            ch.channel().closeFuture().sync();
         }
         finally {
             masterGroup.shutdownGracefully();

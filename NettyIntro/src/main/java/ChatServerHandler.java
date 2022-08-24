@@ -15,7 +15,7 @@ public class ChatServerHandler extends ChannelInboundHandlerAdapter {
         ByteBuf inBuffer = (ByteBuf) msg;
         String received = inBuffer.toString(CharsetUtil.UTF_8);
         System.out.println("[Server received]: " + received);
-        chc.writeAndFlush(Unpooled.copiedBuffer("Hello " + received+  " How r u ?", CharsetUtil.UTF_8));
+        chc.writeAndFlush(Unpooled.copiedBuffer("Hello, How r u ?", CharsetUtil.UTF_8));
 
     }
     public void channelReadComplete(ChannelHandlerContext chc) throws Exception {
