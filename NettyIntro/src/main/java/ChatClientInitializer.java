@@ -14,6 +14,8 @@ public class ChatClientInitializer extends ChannelInitializer<SocketChannel> {
     protected void initChannel(SocketChannel socketChannel) throws Exception {
 
         ChannelPipeline channelPipeline = socketChannel.pipeline();
+        channelPipeline.addLast("decoder", new StringDecoder());
+        channelPipeline.addLast("encoder",new StringEncoder());
         channelPipeline.addLast(new ChatClientHandler());
 
     }

@@ -11,22 +11,21 @@ public class ChatServer {
 
     public static void main(String[] args) throws InterruptedException {
 
-        EventLoopGroup group = new NioEventLoopGroup();
+        EventLoopGroup masterGroup = new NioEventLoopGroup();
+        EventLoopGroup userGroup = new NioEventLoopGroup();
         try{
             ServerBootstrap serverBootstrap = new ServerBootstrap()
-                    .group(group)
+                    .group(masterGroup,userGroup)
                     .channel(NioServerSocketChannel.class)
-                    .localAddress(new InetSocketAddress("localhost", 9999))
+                    //.localAddress(new InetSocketAddress("localhost", 9999))
                     .childHandler(new ChatServerInitializer());
 
-            ChannelFuture channelFuture = serverBootstrap.bind().sync()
+            serverBootstrap.bind(9999).sync()
                     .channel().closeFuture().sync();
         }
-        catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
         finally {
-            group.shutdownGracefully();
+            masterGroup.shutdownGracefully();
+            userGroup.shutdownGracefully();
         }
 
     }

@@ -11,7 +11,8 @@ import java.nio.charset.Charset;
 public class ChatClientHandler extends SimpleChannelInboundHandler<String> {
 
     public void channelActive(ChannelHandlerContext chc) {
-        chc.writeAndFlush(Unpooled.copiedBuffer(" Netty is Buffed !", CharsetUtil.UTF_8));
+        chc.writeAndFlush(Unpooled.copiedBuffer("Netty is Buffed !\n", CharsetUtil.UTF_8));
+        chc.writeAndFlush(Unpooled.copiedBuffer("New Message ",CharsetUtil.UTF_8));
     }
 
     @Override

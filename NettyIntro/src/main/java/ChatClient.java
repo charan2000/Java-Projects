@@ -4,7 +4,12 @@ import io.netty.channel.ChannelFuture;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.InetSocketAddress;
+import java.util.concurrent.TimeUnit;
 
 public class ChatClient {
 
@@ -17,7 +22,7 @@ public class ChatClient {
 //        this.port = port;
 //    }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         EventLoopGroup group = new NioEventLoopGroup();
         try {
@@ -28,14 +33,9 @@ public class ChatClient {
                     .remoteAddress(new InetSocketAddress("localhost", 9999));
 
             ChannelFuture channel = bootstrap.connect().sync().channel().closeFuture().sync();
-//            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-//            while (true) {
-//                channel.write(br.readLine());
-//            }
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        } finally {
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        }
+        finally {
             group.shutdownGracefully();
         }
     }
