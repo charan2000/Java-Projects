@@ -5,26 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a2def05c-e812-4439-8df8-964f843f5501" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../DatagramUDP/DatagramUDP.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DatagramUDP/src/UDPClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../DatagramUDP/src/UDPServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../JavaNettyTCPServer/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../JavaNettyTCPServer/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../JavaNettyTCPServer/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../JavaNettyTCPServer/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../JavaNettyTCPServer/JavaNettyTCPServer.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../JavaNettyTCPServer/lib/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../JavaNettyTCPServer/src/NettyTCPClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../JavaNettyTCPServer/src/NettyTCPServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MultiClientInteractionsSocketProgramming.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Client.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Server.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../NettyIntro/src/main/java/ChatClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../NettyIntro/src/main/java/ChatClientInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../NettyIntro/src/main/java/ChatClientInitializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +40,8 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true"
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />

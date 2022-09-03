@@ -1,31 +1,33 @@
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.Unpooled;
-import io.netty.channel.*;
-import io.netty.util.CharsetUtil;
 
-public class ChatServerHandler extends ChannelInboundHandlerAdapter {
+import io.netty.channel.Channel;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.SimpleChannelInboundHandler;
 
-//    private static final ChannelGroup channels = new DefaultChannelGroup();
+import java.util.ArrayList;
+import java.util.List;
+
+public class ChatServerHandler extends SimpleChannelInboundHandler<String> {
+    // List of connected client channels.
+
+    List<Channel> channelList = new ArrayList<>();
+
+    //    * Whenever client connects to server through channel, add his channel to the
+//	 * list of channels.
+    public void channelActive(ChannelHandlerContext chc) {
+        System.out.println("Client Connected: "+chc.toString());
+        channelList.add(chc.channel());
+    }
 
     @Override
-    public void channelRead(ChannelHandlerContext chc, Object msg) throws Exception {
-
-//        Channel channel = chc.channel();
-
-        ByteBuf inBuffer = (ByteBuf) msg;
-        String received = inBuffer.toString(CharsetUtil.UTF_8);
-        System.out.println("[Server received]: " + received);
-        chc.writeAndFlush(Unpooled.copiedBuffer("Hello, How r u ?", CharsetUtil.UTF_8));
-
-    }
-    public void channelReadComplete(ChannelHandlerContext chc) throws Exception {
-        chc.writeAndFlush(Unpooled.EMPTY_BUFFER)
-                .addListener(ChannelFutureListener.CLOSE);
+    protected void channelRead0(ChannelHandlerContext channelHandlerContext, String s) throws Exception {
+        for(Channel ch : channelList) {
+            System.out.println("Client Sent -> : "+s);
+            ch.writeAndFlush("->"+s+"\n");
+        }
     }
 
-    public void exceptionCaught(ChannelHandlerContext chc, Throwable cause) throws Exception {
-        cause.printStackTrace();
+    public void exceptionCaught(ChannelHandlerContext chc, Throwable cause) {
+        System.out.println("Closing Connection for :"+chc.toString());
         chc.close();
     }
-
 }
