@@ -4,24 +4,9 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-class ConvertLatAndLongValuesToKM {
-    protected static double latLonToKM(double eLat,double eLon, double sLat, double sLon) {
-        int radius = 6371;
-        double dLat = (eLat-sLat) * (Math.PI/180);  // deg2rad below
-        double dLon = (eLon-sLon) * (Math.PI/180);
-        double a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-                   Math.cos((sLat) * (Math.PI/180)) * Math.cos((eLat)*(Math.PI/180)) *
-                   Math.sin(dLon/2) * Math.sin(dLon/2);
-        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-        double distance = (radius * c);
-        System.out.println(distance);
-        return distance;
-    }
-}
-
 public class TripsAnalytics {
 
-    private static String path = "/home/charan/TaskOneTestData.csv";
+    private static String path = "/home/charan/oneDeviceTest.csv";
     private static String line="";
 
     private static List<Double> getValuesOfLatLon(int num, String pos) throws IOException {
@@ -49,7 +34,6 @@ public class TripsAnalytics {
                 count++;
             }
         }
-
         return corrArr;
     }
 
@@ -68,20 +52,18 @@ public class TripsAnalytics {
 
             if(count>1){
 
-                System.out.println("Start Values");
+                System.out.println("\nStart Values");
                 startValues = getValuesOfLatLon(count,"start");
-//                System.out.println(startValues);
+                System.out.println(startValues);
                 System.out.println("End Values");
                 endValues=getValuesOfLatLon(count-1,"end");
-//                System.out.println(endValues);
-                double Distance = (ConvertLatAndLongValuesToKM.latLonToKM(endValues.get(0),endValues.get(1),startValues.get(0),startValues.get(1)));
-
-                System.out.println(Distance);
+                System.out.println(endValues);
+                double Distance = (ConvertionLatLonToKM.latLonToKM(endValues.get(0),endValues.get(1),startValues.get(0),startValues.get(1)));
+                System.out.print("Distance is: ");
+                System.out.print(Distance);
 //                bw.write((char) Distance);
             }
             count++;
         }
-
     }
-
 }
