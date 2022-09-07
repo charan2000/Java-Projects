@@ -1,7 +1,7 @@
 package trips.anapytics;
 
 class ConvertionLatLonToKM {
-    protected static double latLonToKM(double eLat,double eLon, double sLat, double sLon) {
+    protected static int latLonToKM(double eLat,double eLon, double sLat, double sLon) {
         int radius = 6371;
         double dLat = (eLat-sLat) * (Math.PI/180);  // deg2rad below
         double dLon = (eLon-sLon) * (Math.PI/180);
@@ -9,7 +9,7 @@ class ConvertionLatLonToKM {
                 Math.cos((sLat) * (Math.PI/180)) * Math.cos((eLat)*(Math.PI/180)) *
                         Math.sin(dLon/2) * Math.sin(dLon/2);
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-        double distance = (radius * c);
+        int distance = (int) Math.round(radius * c);
 //        System.out.println(distance);
         return distance;
     }

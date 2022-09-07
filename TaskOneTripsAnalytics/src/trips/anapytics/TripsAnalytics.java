@@ -6,7 +6,8 @@ import java.util.List;
 
 public class TripsAnalytics {
 
-    private static String path = "/home/charan/oneDeviceTest.csv";
+    private static final String path = "/home/charan/trips_view.csv";
+    private static final String testPath = "/home/charan/TaskOneTripJumps.csv";
     private static String line="";
 
     private static List<Double> getValuesOfLatLon(int num, String pos) throws IOException {
@@ -14,22 +15,22 @@ public class TripsAnalytics {
         BufferedReader br = new BufferedReader(new FileReader(path));
         int count=0;
         List<Double> corrArr = new ArrayList<>();
-        if(pos.toLowerCase().equals("start")){
+        if(pos.equalsIgnoreCase("start")){
             while((line=br.readLine())!=null) {
                 if(count == (num)) {
                     String[] arr = line.split(",");
+                    corrArr.add(Double.parseDouble(arr[3]));
                     corrArr.add(Double.parseDouble(arr[4]));
-                    corrArr.add(Double.parseDouble(arr[5]));
                 }
                 count++;
             }
         }
-        else if(pos.toLowerCase().equals("end")) {
+        else if(pos.equalsIgnoreCase("end")) {
             while((line=br.readLine())!=null) {
                 if(count == (num)) {
                     String[] arr = line.split(",");
+                    corrArr.add(Double.parseDouble(arr[5]));
                     corrArr.add(Double.parseDouble(arr[6]));
-                    corrArr.add(Double.parseDouble(arr[7]));
                 }
                 count++;
             }
@@ -39,31 +40,50 @@ public class TripsAnalytics {
 
     public static void main(String[] args) throws IOException {
 
-//        String testPath = "/home/charan/testCSV.csv";
         BufferedReader br = new BufferedReader(new FileReader(path));
+        BufferedWriter bw = new BufferedWriter(new FileWriter(testPath));
+
+        String newColumn = "";
+        List<Double> startValues;
+        List<Double> endValues;
+        int distance=0;
+
         int count=0;
-        List<Double> startValues=new ArrayList<>();
-        List<Double> endValues = new ArrayList<>();
         while((line=br.readLine())!=null) {
-            String arr[] = line.split(",");
-//            String deviceId = arr[2];
-
-// TODO: 07/09/22 only one particular device/fleet
-
+            String existingLine = line;
+            if(count==0) {
+                System.out.println(existingLine);
+                bw.write(existingLine);
+                count++;
+            }
             if(count>1){
 
-                System.out.println("\nStart Values");
                 startValues = getValuesOfLatLon(count,"start");
-                System.out.println(startValues);
-                System.out.println("End Values");
                 endValues=getValuesOfLatLon(count-1,"end");
-                System.out.println(endValues);
-                double Distance = (ConvertionLatLonToKM.latLonToKM(endValues.get(0),endValues.get(1),startValues.get(0),startValues.get(1)));
-                System.out.print("Distance is: ");
-                System.out.print(Distance);
-//                bw.write((char) Distance);
+                distance = (ConvertionLatLonToKM.latLonToKM(endValues.get(0),endValues.get(1),startValues.get(0),startValues.get(1)));
+
+                if(distance > 5) {
+//                    System.out.println("\nStart Values");
+//                    System.out.println(startValues);
+//                    System.out.println("End Values");
+//                    System.out.println(endValues);
+//                    System.out.print("Distance is: ");
+//                    System.out.print(distance);
+                    newColumn = existingLine + ","+distance+System.getProperty("line.separator");
+                    System.out.println(newColumn);
+                    try{
+                        bw.write(newColumn);
+
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
             }
+//            System.out.println(line);
             count++;
         }
+        br.close();
+        bw.close();
     }
 }
