@@ -58,12 +58,12 @@ public class TripsAnalytics {
             }
 
             if (count > 1) {
-                startValues = getValuesOfLatLon(count, "start");
-                endValues = getValuesOfLatLon(count - 1, "end");
+                startValues = getValuesOfLatLon(count, "end");
+                endValues = getValuesOfLatLon(count - 1, "start");
                 distance = (ConvertionLatLonToKM.latLonToKM(endValues.get(0),endValues.get(1),startValues.get(0),startValues.get(1)));
 
                 // IF statement to get only distance > 5KM
-                if (distance > 5) {
+//                if (distance > 5) {
                     newColumn = existingLine + ","+distance+System.getProperty("line.separator");
                     System.out.println(newColumn);
                     try{
@@ -72,7 +72,7 @@ public class TripsAnalytics {
                         catch (Exception e) {
                             e.printStackTrace();
                         }
-                    }
+//                    }
                 }
                 count++;
             }
