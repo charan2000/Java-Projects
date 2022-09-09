@@ -16,13 +16,13 @@ public class TripsAnalytics {
         BufferedReader br = new BufferedReader(new FileReader(path));
         String line="";
         int count = 0;
-        List<Double> corrArr = new ArrayList<>();
+        List<Double> coordinatesList = new ArrayList<>();
         if (pos.equalsIgnoreCase("start")) {
             while ((line = br.readLine()) != null) {
                 if (count == (num)) {
                     String[] arr = line.split(",");
-                    corrArr.add(Double.parseDouble(arr[3]));
-                    corrArr.add(Double.parseDouble(arr[4]));
+                    coordinatesList.add(Double.parseDouble(arr[3]));
+                    coordinatesList.add(Double.parseDouble(arr[4]));
                 }
                 count++;
             }
@@ -30,14 +30,14 @@ public class TripsAnalytics {
             while ((line = br.readLine()) != null) {
                 if (count == (num)) {
                     String[] arr = line.split(",");
-                    corrArr.add(Double.parseDouble(arr[5]));
-                    corrArr.add(Double.parseDouble(arr[6]));
+                    coordinatesList.add(Double.parseDouble(arr[5]));
+                    coordinatesList.add(Double.parseDouble(arr[6]));
                 }
                 count++;
             }
         }
         br.close();
-        return corrArr;
+        return coordinatesList;
     }
 
     public static void main(String[] args) throws IOException {
@@ -53,10 +53,9 @@ public class TripsAnalytics {
         int count = 0;
 
         while ((line = br.readLine()) != null) {
-            String existingLine = line;
             if(count==0) {
-            System.out.println(existingLine);
-                bw.write(existingLine+","+"jumpedDistance"+System.getProperty("line.separator"));
+            System.out.println(line);
+                bw.write(line +","+"jumpedDistance"+System.getProperty("line.separator"));
             }
 
             if (count > 1) {
@@ -66,7 +65,7 @@ public class TripsAnalytics {
 
                 // IF statement to get only distance > 5KM
 //                if (distance > 5) {
-                    newColumn = existingLine + ","+distance+System.getProperty("line.separator");
+                    newColumn = line + ","+distance+System.getProperty("line.separator");
                     System.out.println(newColumn);
                     try{
                         bw.write(newColumn);
