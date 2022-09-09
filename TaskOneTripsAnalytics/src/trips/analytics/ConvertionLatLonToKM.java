@@ -13,8 +13,7 @@ class ConvertionLatLonToKM {
                 + Math.cos((sLat) * (Math.PI/180)) * Math.cos((eLat)*(Math.PI/180))
                 * Math.sin(dLon/2) * Math.sin(dLon/2);
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-        int distance = (int) Math.round(radius * c);
-        return distance;
+        return (int) Math.round(radius * c);
 
     }
 }

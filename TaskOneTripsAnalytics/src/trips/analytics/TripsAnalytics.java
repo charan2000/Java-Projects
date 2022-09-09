@@ -9,12 +9,12 @@ public class TripsAnalytics {
 //    Paths for file Input & Output
     private static final String path = "src/trips_view.csv";
     private static final String testPath = "src/TaskOneTripJumps.csv";
-    private static String line = "";
 
     // Method That gets the end Lat & Lon Values and the consecutive Start Lat & Lon values
     private static List<Double> getValuesOfLatLon(int num, String pos) throws IOException {
 
         BufferedReader br = new BufferedReader(new FileReader(path));
+        String line="";
         int count = 0;
         List<Double> corrArr = new ArrayList<>();
         if (pos.equalsIgnoreCase("start")) {
@@ -36,6 +36,7 @@ public class TripsAnalytics {
                 count++;
             }
         }
+        br.close();
         return corrArr;
     }
 
@@ -43,6 +44,7 @@ public class TripsAnalytics {
 
         BufferedReader br = new BufferedReader(new FileReader(path));
         BufferedWriter bw = new BufferedWriter(new FileWriter(testPath));
+        String line = "";
 
         String newColumn = "";
         List<Double> startValues;
