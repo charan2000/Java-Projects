@@ -1,81 +1,42 @@
-<<<<<<< HEAD
 package com.oops.bitwise.hexadecimal;
-=======
-package com.oops.bitwise.hexadecimal;//package com.oops.bitwise.hexadecimal;
->>>>>>> 18c389fc79dbac98a291bdd20601c0d1b8b7ce03
 
+import java.io.*;
 import java.util.PriorityQueue;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-<<<<<<< HEAD
-abstract class FilterHexValues {
-    abstract PriorityQueue<Integer> getHexValues(String str);                   //Abstract Class with abstract method
-}
-
-class HexValuesImplementation extends FilterHexValues {
-    @Override
-    PriorityQueue<Integer> getHexValues(String str) {                           // Overriding abstract method
-
-        PriorityQueue<Integer> pq = new PriorityQueue<>();
-        String[] inputStr = str.split(" ");
-
-        Pattern p = Pattern.compile("0x{1}[0-9a-fA-F]+");
-
-        for (String s : inputStr) {
-            Matcher m = p.matcher(s);
-            if (m.matches()) {
-                pq.add(Integer.parseInt(s.substring(2, s.length()), 16));  // Method Chaining // And taking only hex value
-                                                                                // after 0x using substring method
-            }
-        }
-        return pq;
-    }
-
-    void getPriorityQueue(PriorityQueue pq) {
-        System.out.println("Sorted Priority queue is: ");
-        while(!pq.isEmpty()) {
-            Integer i = (int) pq.poll();                                        // Method for printing Priority queue in sorted order
-            System.out.println(i);
-        }
-    }
-}
-
-=======
->>>>>>> 18c389fc79dbac98a291bdd20601c0d1b8b7ce03
 public class BitwiseOperationOnHexaDecimal {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
 
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
-<<<<<<< HEAD
 
-=======
->>>>>>> 18c389fc79dbac98a291bdd20601c0d1b8b7ce03
-        HexValuesImplementation hexImp = new HexValuesImplementation();                 // Object creation for Class that extends abstract class
+        HexValuesImplementation hexImp = new HexValuesImplementation();// Object creation for Class that extends abstract class
         PriorityQueue<Integer> hv = new PriorityQueue<>(hexImp.getHexValues(input));    // Creating new Priority queue
 
         int result = hv.peek();
         int count=0;
         for (int elem: hv) {
             if (count==0) {
-<<<<<<< HEAD
 //                System.out.println(elem);
                 count++;
                 continue;
             }
 //            System.out.println(elem);
-=======
-                count++;
-                continue;
-            }
->>>>>>> 18c389fc79dbac98a291bdd20601c0d1b8b7ce03
             int b = elem;
             result = result | b;                                    //Bitwise OR (|) with the previous value
             count++;
         }
+
+//      Serialization of PriorityQueue object hv:
+        FileOutputStream fos = new FileOutputStream(new File("src/serialization.txt"));
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+        oos.writeObject(hv);
+        fos.close();
+        oos.close();
+
         try{
             if (result < 10 ) {
                 throw new Exception();
@@ -85,8 +46,17 @@ public class BitwiseOperationOnHexaDecimal {
             System.out.println( "Exception: ==> Result is below 10 ");
         }
         System.out.println("Final Result = "+Integer.toHexString(result));  // Printing the final result in hex
-
         hexImp.getPriorityQueue(hv);
+        System.out.println("*** End of Program ***\n");
+
+
+//      Deserialization of PriorityQueue object hv:
+        FileInputStream fis = new FileInputStream(new File("src/serialization.txt"));
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        PriorityQueue<Integer> newHV = (PriorityQueue<Integer>) ois.readObject();
+        System.out.println(newHV);
+        fis.close();
+        ois.close();
 
     }
 
